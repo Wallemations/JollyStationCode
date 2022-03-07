@@ -129,6 +129,8 @@ GLOBAL_VAR_INIT(looc_allowed, TRUE)
 			if(send)
 				var/message_contents = span_message(msg)
 				to_chat(target, span_looc(span_bold("<span class='prefix'><font color='[LOOC_PREFIX_COLOR]'>LOOC[prefix]: </font></span><font color='[LOOC_SPAN_COLOR]'><EM>[display_admin? "[display_admin]" : "[display_name]"]:</EM> [message_contents]</span></font>")))
+				if(target.mob.runechat_prefs_check(target.mob))
+					new /datum/chatmessage(text = ("LOOC: " + message_contents), target = source, owner = target.mob)
 
 // OOP getters be like
 /mob/proc/get_looc_source()
